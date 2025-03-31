@@ -1,0 +1,174 @@
+<!--random_user.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>random_user - Old Web Edition</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000033;
+      color: #00ffff;
+      font-family: 'Comic Sans MS', 'Courier New', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      min-height: 100vh;
+      cursor: url('https://www.rw-designer.com/icon-downloader.php?id=6989&format=cur'), auto;
+    }
+
+    marquee {
+      display: block;
+      width: 100%;
+      color: #00ffff;
+      background: #000066;
+      font-weight: bold;
+      font-size: 2rem;
+      border-bottom: 2px dashed #00ccff;
+      padding: 0.8rem 0;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .retro-header {
+      width: 100%;
+      background: #c0c0c0;
+      border-bottom: 3px double #666;
+      font-family: 'Verdana';
+    }
+
+    .retro-header td {
+      padding: 0.5rem;
+    }
+
+    .retro-link {
+      font-family: 'Verdana', sans-serif;
+      font-size: 0.95rem;
+      color: #0000cc;
+      text-decoration: underline;
+      margin-left: 0.8rem;
+    }
+
+    .retro-link:hover {
+      color: #800080;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      color: #000000;
+      padding: 2rem;
+      width: 400px;
+      border: 5px double #00ccff;
+      box-shadow: 0 0 15px #33ffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto 2rem;
+    }
+
+    .profile-card img {
+      width: 180px;
+      height: 180px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 4px solid #ff33cc;
+      margin-bottom: 1.2rem;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .profile-card h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff3399;
+      text-shadow: 1px 1px 0 #000;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-card h3 {
+      font-size: 1.1rem;
+      color: #0033ff;
+      margin-bottom: 0.4rem;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 1.2rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .search-bar {
+      margin: 1rem 0;
+    }
+
+    .search-bar input {
+      padding: 0.4rem;
+      font-size: 1rem;
+      border: 2px inset gray;
+    }
+
+    .search-bar button {
+      padding: 0.4rem 1rem;
+      font-weight: bold;
+      background: #e0e0e0;
+      border: 2px outset gray;
+    }
+  </style>
+</head>
+<body>
+  <table class="retro-header">
+    <tr>
+      <td><b>Yahoo! Directory</b></td>
+      <td style="text-align: right;">
+        <a href="#" class="retro-link">Sign In</a>
+        <a href="#" class="retro-link">Help</a>
+      </td>
+    </tr>
+  </table>
+
+  <marquee behavior="scroll" direction="right">
+    💾 Welcome to my homepage! 🚀
+  </marquee>
+
+  <form class="search-bar">
+    <input type="text" placeholder="Search Yahoo!">
+    <button>Search</button>
+  </form>
+
+  <div class="profile-card">
+    <div id="photo"></div>
+    <h2></h2>
+    <h3 id="country"></h3>
+    <h3 id="email"></h3>
+  </div>
+
+  <script>
+    fetch("https://randomuser.me/api/").then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    }).then((data) => {
+      const firstName = data.results[0].name.first;
+      const lastName = data.results[0].name.last;
+      const photo = data.results[0].picture.large;
+      const countryName = data.results[0].location.country;
+      const mail = data.results[0].email;
+
+      document.querySelector('#photo').innerHTML = `<img src="${photo}">`;
+      document.querySelector('h2').innerHTML = `${firstName} ${lastName}`;
+      document.querySelector('#country').innerHTML = `${countryName}`;
+      document.querySelector('#email').innerHTML = `${mail}`;
+    });
+  </script>
+</body>
+</html>
